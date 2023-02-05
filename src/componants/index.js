@@ -1,0 +1,7 @@
+export{default as Heading} from './Heading.jsx'
+export{default as Form} from './Form.jsx'
+export{default as Service} from './Service.jsx'
+export{default as Nav} from './Nav.jsx'
+export{default as Footer} from './Footer.jsx'
+export{default as Home} from './Home.jsx'
+export{default as Login} from './Login.jsx'
