@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.css'
 import 'firebase/app';
 import firebase from 'firebase/app'
 import GoogleButton from 'react-google-button'
+import FacebookLogin from 'react-facebook-login';
 import { UserAuth } from '../context/AuthContex';
-
-
+import './Login.css'
+import facebook from '../facebooklogo.webp'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase';
 function Login() {
 
 
-const {googleSignIn} = UserAuth();
-
+const {googleSignIn , facebookSignIn} = UserAuth();
 
 
 const handleGoogleSignIn = async () => {
@@ -22,8 +24,14 @@ const handleGoogleSignIn = async () => {
     }
 }
 
+const handleFacebookSignIn = async () => {
 
-
+    try {
+        await facebookSignIn()
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 
 
@@ -35,7 +43,11 @@ const handleGoogleSignIn = async () => {
             <div className="Google">
                 <GoogleButton onClick={handleGoogleSignIn}/>
             </div>
-            <div className="facebook"><button>facebook</button></div>
+            <div className="facebook">
+                <div  className="facebook-button" onClick={handleFacebookSignIn} >
+                    <img src={facebook} alt="" /> <p>Sign in with Facebook</p>
+                </div>
+            </div>
         </div>
     </div>
   )

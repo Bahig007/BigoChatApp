@@ -6,7 +6,7 @@ import { AiOutlineAlignRight ,AiFillHome ,AiFillPropertySafety,AiFillInfoCircle}
 import { BiLogIn ,BiHomeAlt} from "react-icons/bi";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { ChakraProvider} from '@chakra-ui/react'
-
+import { UserAuth } from '../context/AuthContex';
 import {
   Menu,
   MenuButton,
@@ -16,6 +16,8 @@ import {
 } from '@chakra-ui/react'
 
 export default function Nav() {
+
+  const {user,logOut} = UserAuth()
 
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(null);
@@ -47,8 +49,9 @@ export default function Nav() {
           </div>
           <div className='links'>
             <ul>
+              {user?.displayName? <p>log out </p> : <li><Link to='/Login'>Log In</Link></li>}
+              
               <li><Link to='/'>Home</Link></li>
-              <li><Link to='/Login'>Log In</Link></li>
               <li>Report Issues</li>
             </ul>
           </div>
