@@ -1,10 +1,12 @@
 import React from 'react'
-import { Heading } from '.'
+import { Footer, Heading, Nav } from '.'
 
 function Home() {
   return (
     <div>
+      <Nav/>
       <Heading/>
+      <Footer/>
     </div>
   )
 }

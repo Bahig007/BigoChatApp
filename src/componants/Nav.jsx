@@ -18,7 +18,6 @@ import {
 export default function Nav() {
 
   const {user,logOut} = UserAuth()
-
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(null);
   const [logged, setlogged] = useState(true);
@@ -41,18 +40,26 @@ export default function Nav() {
   }, [screenSize]);
 
 
+  const handleSignOut =  async ()=> {
+    try {
+        await logOut()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+  
   return (
-        <div className='container'>
+        <div className='container' >
           <div className='logo'>
             <h4>Bigo</h4>
           </div>
           <div className='links'>
             <ul>
-              {user?.displayName? <p>log out </p> : <li><Link to='/Login'>Log In</Link></li>}
-              
+              {user?.displayName? <button onClick={handleSignOut} >Sign Out</button> : <li><Link to='/Login'>Log In</Link></li>}
               <li><Link to='/'>Home</Link></li>
-              <li>Report Issues</li>
+              {user && ( 
+              <li><Link to='/chat'>Chat</Link></li>)}
             </ul>
           </div>
           {activeMenu && (
@@ -69,10 +76,9 @@ export default function Nav() {
             <MenuList>
               <MenuItem icon={<BiHomeAlt/>}><Link to='/'>Home</Link></MenuItem>
               <MenuItem icon={<BiLogIn/>}><Link to='/Login'>Log In</Link></MenuItem>
-              {logged && ( 
-              <MenuItem icon={<IoMdInformationCircleOutline/>}>Mark as Draft</MenuItem>
+              {user && ( 
+              <MenuItem icon={<IoMdInformationCircleOutline/>}><Link to='/chat'>Chat</Link></MenuItem>
               )}
-             
             </MenuList>
           </Menu>
           </ChakraProvider>

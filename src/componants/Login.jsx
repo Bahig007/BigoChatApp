@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Login.css'
 import 'firebase/app';
 import firebase from 'firebase/app'
@@ -9,11 +9,13 @@ import './Login.css'
 import facebook from '../facebooklogo.webp'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 function Login() {
 
 
-const {googleSignIn , facebookSignIn} = UserAuth();
+const {googleSignIn , facebookSignIn,user} = UserAuth();
 
+const navigate = useNavigate(); 
 
 const handleGoogleSignIn = async () => {
 
@@ -25,7 +27,6 @@ const handleGoogleSignIn = async () => {
 }
 
 const handleFacebookSignIn = async () => {
-
     try {
         await facebookSignIn()
     } catch (err) {
@@ -33,7 +34,11 @@ const handleFacebookSignIn = async () => {
     }
 }
 
-
+useEffect(() => {
+    if(user != null ){
+        navigate('/chat')
+    }
+},[user])
 
 
 

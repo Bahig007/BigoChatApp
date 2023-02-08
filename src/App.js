@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes , Route } from "react-router-dom"
-import { Footer, Nav ,Home, Service , Login} from './componants';
+import { Footer, Nav ,Home, Service , Login,Chat} from './componants';
 import {AuthContextProvider } from './context/AuthContex.jsx'
+import Protected from './componants/Protected';
 
 function App() {
   return (
@@ -10,13 +11,19 @@ function App() {
 
       
     <div style={{ fontFamily: 'Avenir' }}>
-       <Nav/>
+      
       <Routes>
       <Route exact path='/' element={<Home/>}/>
       <Route exact path='/login' element={<Login/>}/>
-      {/* <Route exact path='/' element={<Home/>}/> */}
+      <Route exact path='/chat'
+       element={ 
+        <Protected>
+       <Chat/> 
+       </Protected>
+      }
+       />
+        
       </Routes>
-       <Footer/>
     </div>
     </AuthContextProvider>
     </Router>
