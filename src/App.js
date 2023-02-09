@@ -10,8 +10,8 @@ function App() {
       <AuthContextProvider>
 
       
-    <div style={{ fontFamily: 'Avenir' }}>
-      
+      <div style={{ fontFamily: 'Avenir' }}>
+      <Nav/>
       <Routes>
       <Route exact path='/' element={<Home/>}/>
       <Route exact path='/login' element={<Login/>}/>
@@ -24,6 +24,7 @@ function App() {
        />
         
       </Routes>
+      <Footer/>
     </div>
     </AuthContextProvider>
     </Router>
